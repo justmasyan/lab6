@@ -1,0 +1,95 @@
+#include <stdio.h>
+#include <ncurses.h>
+#include <pthread.h>
+/*void *consume (void *mass)
+{
+	place *data = (*void) mass;
+	uint32_t symbol;
+	while ((symbol = getch()) != 'j')
+	{
+	if(symbol == KEY_RIGHT)
+	data->x
+
+
+
+
+
+}
+*/
+/*
+*void *producer (void *mass)
+{
+	stack *data = (stack*) mass;
+
+}	
+*/
+
+
+
+
+struct current 
+{
+	int x;
+	int y;
+	int x_next;
+	int y_next;
+
+}place;
+
+
+
+
+
+
+int main()
+{
+	uint32_t symbol;
+	initscr();
+	keypad(stdscr,TRUE);
+
+	for (int i = -5; i < 5;i++)
+	{
+	mvaddch(LINES/3, COLS/2 + i,'-');
+	mvaddch(2*LINES/3,COLS/2 + i,'-');
+	}
+
+	for (int i = LINES/3;i <= 2*LINES/3;i++)
+	{
+	mvaddch(i,COLS/2 - 5,'|');
+	mvaddch(i,COLS/2 + 5,'|');
+	}	
+
+	place.y = 2*LINES/3 - 1;
+	place.x = COLS/2 - 5 + 1;
+	place.y_next = place.y;
+		
+
+	while((symbol = getch()) != 'j')
+	{	
+		
+		if (symbol == KEY_RIGHT)
+		{
+			place.x_next = place.x + 1;
+			if(place.x_next == COLS/2 + 5)
+			{
+			place.x_next = COLS/2 - 4;
+			place.y_next = place.y - 1;
+			}
+		}
+
+		mvaddch(place.y,place.x,'#');
+		place.x = place.x_next;
+		place.y = place.y_next;
+
+	}	
+
+
+	getch();
+/*	pthread_t first_th, second_th;
+	
+	pthread_create (&first_th,NULL,consume,(void*)&place);	
+*/
+
+
+	return 0;
+}
